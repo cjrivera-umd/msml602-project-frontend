@@ -1,0 +1,72 @@
+.player {
+    max-height: 400px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.match-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.games-prompt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.prompt-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.prompt {
+    display: inline;
+}
+
+.team-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0px;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    width: 40%;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.selected-team {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.flag {
+    width: 100px;
+    height: 60px;
+    border-style: solid;
+    margin-right: 10px;
+}
+
+.predict {
+    margin-top: 50px;
+    display: inline-flex;
+}
