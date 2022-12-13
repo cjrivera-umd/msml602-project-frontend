@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, Card, Typography, InputLabel, Select, MenuItem, Button } from '@mui/material'
+import { Card, Typography, InputLabel, Select, MenuItem, Button } from '@mui/material'
 import './MatchUp.css'
 import player_A from '../resources/football-player-A.png'
 import player_B from '../resources/football-player-B.png'
@@ -11,7 +11,6 @@ class MatchUp extends React.Component {
         super(props)
 
         this.state = {
-            gamesConsidered: 0,
             teamA: '',
             teamB: ''
         }
@@ -31,16 +30,20 @@ class MatchUp extends React.Component {
     }
 
     predict = () => {
-        const {gamesConsidered, teamA, teamB} = this.state
+        const { teamA, teamB} = this.state
 
-        if (!teamA || !teamB || teamA === teamB)
+        if (!teamA || !teamB || teamA === teamB) {
             alert('Choose two different teams.')
-    }
+            return
+        }
 
-    handleGamesConsideredChange = (event) => {
-        const value = event.target
-        if (!value || value >= 0)
-            this.setState({ gamesConsidered: value })
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React POST Request Example' })
+        };
+        fetch('https://msml602-project-backend.onrender.com/prediction', requestOptions)
+            .then(response => console.log(response.json()))
     }
 
     handleTeamAChange = (event) => {
@@ -59,15 +62,6 @@ class MatchUp extends React.Component {
                 <img className='player' alt='Football' src={player_A} />
 
                 <div className='match-up'>
-
-                    <div className='games-prompt'>
-                        <div className='prompt-container'>
-                            <Typography className='prompt' variant='h6'>How many previous games to consider?</Typography>
-                            <Typography className='prompt' variant='subtitle1'>(Leave blank for all.)</Typography>
-                        </div>
-
-                        <TextField id='outlined-number' label='Last # of Games' type='number' onChange={this.handleGamesConsideredChange} />
-                    </div>
 
                     <div className='team-selection'>
                             <Card className='team' variant='elevation'>
