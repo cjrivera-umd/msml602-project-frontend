@@ -37,13 +37,36 @@ class MatchUp extends React.Component {
             return
         }
 
+        const headers = { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '',
+            'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS',
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'React POST Request Example' })
+            headers: headers,
+            body: JSON.stringify({ home: teamA, away: teamB })
         };
         fetch('https://msml602-project-backend.onrender.com/prediction', requestOptions)
-            .then(response => console.log(response.json()))
+            .then(response => response.json())
+            .then(data => {
+                let winner = ''
+                if (data.predicted_winner === 'Home')
+                    winner = 'Team A'
+                else if (data.predicted_winner === 'Away')
+                    winner = 'Team B'
+                else
+                    winner = 'Tie'
+
+                let msg = ''
+                if (winner === 'Tie')
+                    msg = 'The match will go to penalty kicks!'
+                else
+                    msg = `The winner is ${winner}!`
+
+                alert(msg)
+            })
     }
 
     handleTeamAChange = (event) => {
